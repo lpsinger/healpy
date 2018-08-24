@@ -12,5 +12,4 @@ matrix:
 
 script:
   - $PIP install cibuildwheel==0.9.4
-  - which g++
   - cibuildwheel --output-dir wheelhouse
