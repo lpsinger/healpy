@@ -8,7 +8,7 @@ matrix:
       env: PIP=pip
     - os: osx
       language: generic
-      env: PIP=pip2
+      env: PIP=pip2 CIBW_ENVIRONMENT="V=1"
 
 script:
   - $PIP install cibuildwheel==0.9.4
