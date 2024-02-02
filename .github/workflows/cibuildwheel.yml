@@ -42,6 +42,10 @@ jobs:
           python-version: "3.8 - 3.12"
           update-environment: false
 
+      - name: Add msys2 to PATH
+        shell: bash
+        run: echo "C:\\msys64\\usr\\bin" >> $GITHUB_PATH
+
       - name: Build wheels
         shell: bash
         run: pipx run cibuildwheel
