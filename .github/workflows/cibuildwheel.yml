@@ -44,7 +44,11 @@ jobs:
 
       - name: Add msys2 to PATH
         shell: bash
-        run: echo "C:\\msys64\\usr\\bin" >> $GITHUB_PATH
+        run: echo "/c/msys64/usr/bin" >> $GITHUB_PATH
+
+      - name: Check PATH
+        shell: bash
+        run: echo "$PATH"
 
       - name: Build wheels
         shell: bash

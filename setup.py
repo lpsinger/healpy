@@ -126,7 +126,6 @@ class build_external_clib(build_clib):
                 if not os.path.exists(
                     os.path.join(build_info["local_source"], "configure")
                 ):
-                    log.info("env = %", env)
                     log.info("running 'autoreconf -i' for library '%s'", lib_name)
                     check_call(
                         ["autoreconf", "-i"], cwd=build_info["local_source"], env=env
