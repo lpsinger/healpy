@@ -46,7 +46,7 @@ jobs:
         shell: bash
         run: pipx run cibuildwheel
         env:
-          CIBW_BEFORE_ALL_WINDOWS: pacman -S pkgconf
+          CIBW_BEFORE_ALL_WINDOWS: vcpkg install pkgconf
           CIBW_ENVIRONMENT: MPLBACKEND=agg
           # Skip PyPy builds; Astropy wheels are not built for PyPy.
           # Skip i686 builds.
