@@ -64,15 +64,16 @@ class build_external_clib(build_clib):
         except AttributeError:
             env = dict(os.environ)
 
-            try:
-                check_output(["pkg-config", "--version"])
-            except OSError as e:
-                if e.errno != errno.ENOENT:
-                    raise
-                log.warn("pkg-config is not installed, falling back to pykg-config")
-                env["PKG_CONFIG"] = shutil.which('pykg-config.py')
-            else:
-                env["PKG_CONFIG"] = "pkg-config"
+            if "PKG_CONFIG" not in env:
+                try:
+                    check_output(["pkg-config", "--version"])
+                except OSError as e:
+                    if e.errno != errno.ENOENT:
+                        raise
+                    log.warn("pkg-config is not installed, falling back to pykg-config")
+                    env["PKG_CONFIG"] = shutil.which('pykg-config.py')
+                else:
+                    env["PKG_CONFIG"] = "pkg-config"
 
             build_clib = os.path.realpath(self.build_clib)
             pkg_config_path = (
