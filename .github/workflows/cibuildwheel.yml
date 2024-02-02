@@ -52,11 +52,18 @@ jobs:
             libtool
             pkgconf
 
+      - name: Check path
+        shell: msys2 {0}
+        run: echo $PATH
+
+      - name: Check /usr/bin
+        shell: msys2 {0}
+        run: ls /usr/bin
+
       - name: Build wheels
         shell: msys2 {0}
         run: pipx run cibuildwheel
         env:
-          CIBW_ENVIRONMENT: MPLBACKEND=agg
           # Skip PyPy builds; Astropy wheels are not built for PyPy.
           # Skip i686 builds.
           # Skip MUSL libc builds.
