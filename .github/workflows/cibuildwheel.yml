@@ -42,19 +42,19 @@ jobs:
           python-version: "3.8 - 3.12"
           update-environment: false
 
-      - name: Add msys2 to PATH
-        shell: bash
-        run: echo "C:\\msys64\\usr\\bin" >> $GITHUB_PATH
-
-      - name: Check PATH
-        shell: bash
-        run: echo "$PATH"
+      - name: Install msys2
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: ucrt64
+          install: >-
+            mingw-w64-ucrt64-autotools
+            mingw-w64-ucrt64-libtool
+            mingw-w64-ucrt64-pkgconf
 
       - name: Build wheels
-        shell: bash
+        shell: msys2 {0}
         run: pipx run cibuildwheel
         env:
-          CIBW_BEFORE_ALL_WINDOWS: pacman --noconfirm -S autoconf automake libtool pkgconf; which autoreconf; which pkg-config
           CIBW_ENVIRONMENT: MPLBACKEND=agg
           # Skip PyPy builds; Astropy wheels are not built for PyPy.
           # Skip i686 builds.
