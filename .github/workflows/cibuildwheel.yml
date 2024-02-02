@@ -44,7 +44,7 @@ jobs:
 
       - name: Add msys2 to PATH
         shell: bash
-        run: echo "/c/msys64/usr/bin" >> $GITHUB_PATH
+        run: echo "C:\\msys64\\usr\\bin" >> $GITHUB_PATH
 
       - name: Check PATH
         shell: bash
@@ -54,7 +54,7 @@ jobs:
         shell: bash
         run: pipx run cibuildwheel
         env:
-          CIBW_BEFORE_ALL_WINDOWS: pacman --noconfirm -S autoconf automake libtool pkgconf
+          CIBW_BEFORE_ALL_WINDOWS: pacman --noconfirm -S autoconf automake libtool pkgconf; which autoreconf; which pkg-config
           CIBW_ENVIRONMENT: MPLBACKEND=agg
           # Skip PyPy builds; Astropy wheels are not built for PyPy.
           # Skip i686 builds.
